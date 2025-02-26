@@ -243,7 +243,7 @@ while another_round == 'Y':
 
     # determine winners and update balances
     # player 1 lose condition
-    if (player1.is_busted() or dealer.value() > player1.value() and not dealer.is_busted()):
+    if (player1.is_busted() or dealer.value() >= player1.value() and not dealer.is_busted()):
         print(f"Ouch! {player1.name} loses ${player1_bet}")
         dealer.win_bet(player1_bet)
     # player 1 win condition
@@ -252,7 +252,7 @@ while another_round == 'Y':
         player1.win_bet(player1_bet * 2)
         dealer.money -= player1_bet
     # player 2 lose condition
-    if (player2.is_busted() or dealer.value() > player2.value() and not dealer.is_busted()):
+    if (player2.is_busted() or dealer.value() >= player2.value() and not dealer.is_busted()):
         print(f"Ouch! {player2.name} loses ${player2_bet}")
         dealer.win_bet(player2_bet)
     # player 2 win condition
