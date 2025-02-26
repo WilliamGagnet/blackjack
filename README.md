@@ -1,2 +1,2 @@
 # blackjack
-Blackjack program made with python
+Blackjack program made with Python.
