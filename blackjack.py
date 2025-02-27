@@ -242,22 +242,30 @@ while another_round == 'Y':
     dealer.play(deck)
 
     # determine winners and update balances
+    # player 1 tie condidtion
+    if (player1.value() == dealer.value() or (player1.is_busted() and dealer.is_busted())):
+        print(f"It's a tie! {player1.name} loses $0")
+        player1.win_bet(player1_bet)
     # player 1 lose condition
-    if (player1.is_busted() or dealer.value() >= player1.value() and not dealer.is_busted()):
-        print(f"Ouch! {player1.name} loses ${player1_bet}")
+    if (player1.is_busted() or dealer.value() > player1.value() and not dealer.is_busted()):
+        print(f"Oof! {player1.name} loses ${player1_bet}")
         dealer.win_bet(player1_bet)
     # player 1 win condition
     else:
-        print(f"Yowzah! {player1.name} wins ${player1_bet}")
+        print(f"Bang! {player1.name} wins ${player1_bet}")
         player1.win_bet(player1_bet * 2)
         dealer.money -= player1_bet
+    # player 2 tie condidtion
+    if (player2.value() == dealer.value() or (player2.is_busted() and dealer.is_busted())):
+        print(f"It's a tie! {player2.name} loses $0")
+        player2.win_bet(player2_bet)
     # player 2 lose condition
-    if (player2.is_busted() or dealer.value() >= player2.value() and not dealer.is_busted()):
-        print(f"Ouch! {player2.name} loses ${player2_bet}")
+    elif (player2.is_busted() or dealer.value() > player2.value() and not dealer.is_busted()):
+        print(f"Oof! {player2.name} loses ${player2_bet}")
         dealer.win_bet(player2_bet)
     # player 2 win condition
     else:
-        print(f"Yowzah! {player2.name} wins ${player2_bet}")
+        print(f"Bang! {player2.name} wins ${player2_bet}")
         player2.win_bet(player2_bet * 2)
         dealer.money -= player2_bet
     
