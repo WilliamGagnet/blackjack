@@ -82,18 +82,33 @@ print()
 '''
 
 class Deck:
-    def __init__(self):
-        self.cards = []
-        
+    def __init__(self, deck_count):
+        self.deck_count = deck_count
+        self.cards = self.generate_deck()
+    
+    def generate_deck(self):
+        base_deck = []
         for suit in Card.SUITS:
             for rank in Card.RANKS:
-                self.cards.append(Card(rank, suit))
-    
-    def shuffle(self):
-        random.shuffle(self.cards)
+                base_deck.append(Card(rank, suit))
+        base_deck *= self.deck_count
+        random.shuffle(base_deck)
+        return base_deck
     
     def deal_card(self):
+        if (self.needs_refill()):
+            self.refill()
         return self.cards.pop(0)
+    
+    # checks if the deck has >= 20 cards in it
+    def needs_refill(self):
+        if (len(self.cards) <= 20):
+            return True
+        else:
+            return False
+    
+    def refill(self):
+        self.cards = self.generate_deck()
 
 '''
 # deck testing
@@ -181,8 +196,9 @@ class Dealer(Player):
         print("----------------------------")
 
 # initializes some game stuff
-deck = Deck()
-deck.shuffle()
+print(f"Welcome to Blackjack!")
+num_decks = int(input("How many decks do you want to use? "))
+deck = Deck(num_decks)
 
 # initializes player 1
 player1_hand = Hand()
@@ -219,9 +235,6 @@ while another_round == 'Y':
 
     player1.place_bet(player1_bet)
     player2.place_bet(player2_bet)
-
-    # shuffles deck
-    deck.shuffle()
 
     print("The initial starting cards are:")
     print("--------------------------------")
