@@ -260,7 +260,7 @@ while another_round == 'Y':
         print(f"It's a tie! {player1.name} loses $0")
         player1.win_bet(player1_bet)
     # player 1 lose condition
-    if (player1.is_busted() or dealer.value() > player1.value() and not dealer.is_busted()):
+    elif (player1.is_busted() or dealer.value() > player1.value() and not dealer.is_busted()):
         print(f"Oof! {player1.name} loses ${player1_bet}")
         dealer.win_bet(player1_bet)
     # player 1 win condition
